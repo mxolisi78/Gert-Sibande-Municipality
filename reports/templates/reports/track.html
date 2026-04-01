@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Gert Sibande Municipality | Track Service Request</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Bootstrap Icons (optional) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fc;
+            color: #1e2a3e;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ========= TOP BAR (municipality style) ========= */
+        .top-bar {
+            background-color: #0b2b3b;
+            color: white;
+            padding: 10px 0;
+            font-size: 0.85rem;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .top-bar a {
+            color: #e0f2fe;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .top-bar a:hover {
+            color: #ffcd3c;
+        }
+
+        /* ========= MAIN NAVIGATION ========= */
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 18px 0;
+        }
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f6e43, #0f4c2d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #5a6874;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e2a3e;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover {
+            color: #1f6e43;
+        }
+        .nav-links .active {
+            color: #1f6e43;
+            border-bottom: 2px solid #1f6e43;
+            padding-bottom: 4px;
+        }
+        .btn-outline-light {
+            background: transparent;
+            border: 1.5px solid #1f6e43;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: #1f6e43;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-outline-light:hover {
+            background: #1f6e43;
+            color: white;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #1f6e43;
+        }
+
+        /* ========= HERO SECTION ========= */
+        .hero {
+            background: linear-gradient(105deg, #eef4f0 0%, #dfe9e3 100%);
+            padding: 48px 0 56px;
+            border-bottom: 1px solid rgba(31, 110, 67, 0.15);
+        }
+        .hero-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero-content h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0b2b3b;
+            margin-bottom: 12px;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #2c4b3e;
+            font-weight: 500;
+        }
+
+        /* ========= TRACKING CARD ========= */
+        .tracking-section {
+            padding: 60px 0 80px;
+            background: #ffffff;
+        }
+        .tracking-card {
+            max-width: 620px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: 1px solid rgba(31, 110, 67, 0.2);
+        }
+        .tracking-header {
+            background: #0b2b3b;
+            padding: 28px 32px;
+            text-align: center;
+        }
+        .tracking-header i {
+            font-size: 3rem;
+            color: #ffcd3c;
+            background: rgba(255,255,240,0.1);
+            padding: 12px;
+            border-radius: 60px;
+            margin-bottom: 12px;
+        }
+        .tracking-header h3 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+        .tracking-header p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+        .tracking-body {
+            padding: 36px 32px 40px;
+        }
+        .tracking-form {
+            margin-bottom: 28px;
+        }
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 28px;
+        }
+        .input-group-custom i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c8b75;
+            font-size: 1.1rem;
+            z-index: 2;
+        }
+        .input-group-custom input {
+            width: 100%;
+            padding: 16px 20px 16px 52px;
+            font-size: 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            background: #fefefe;
+            transition: all 0.2s;
+            outline: none;
+        }
+        .input-group-custom input:focus {
+            border-color: #1f6e43;
+            box-shadow: 0 0 0 3px rgba(31,110,67,0.2);
+        }
+        .input-group-custom input::placeholder {
+            color: #9aaebf;
+        }
+        .tracking-btn {
+            width: 100%;
+            background: #1f6e43;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            margin-top: 8px;
+        }
+        .tracking-btn:hover {
+            background: #0f5436;
+            transform: scale(0.98);
+            box-shadow: 0 8px 18px rgba(31,110,67,0.3);
+        }
+        .tracking-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ========= STATUS RESULT CARD ========= */
+        .status-result {
+            background: #f8fafc;
+            border-radius: 28px;
+            padding: 24px;
+            margin-top: 28px;
+            border: 1px solid #e2edf2;
+            transition: all 0.3s ease;
+        }
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .status-header i {
+            font-size: 1.8rem;
+        }
+        .status-header h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0b2b3b;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 16px 0;
+        }
+        .status-pending {
+            background: #fff3e0;
+            color: #e67e22;
+            border-left: 4px solid #e67e22;
+        }
+        .status-progress {
+            background: #e3f2fd;
+            color: #1f6e43;
+            border-left: 4px solid #1f6e43;
+        }
+        .status-resolved {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #2e7d32;
+        }
+        .status-detail-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .status-detail-item i {
+            width: 28px;
+            color: #1f6e43;
+            font-size: 1.1rem;
+        }
+        .status-detail-item strong {
+            width: 110px;
+            color: #4a5568;
+        }
+        .status-detail-item span {
+            flex: 1;
+            color: #2d3748;
+        }
+        .no-status {
+            text-align: center;
+            padding: 32px 20px;
+            color: #718096;
+        }
+        .no-status i {
+            font-size: 3rem;
+            color: #cbd5e0;
+            margin-bottom: 12px;
+        }
+
+        /* ========= QUICK TIPS SECTION ========= */
+        .tips-section {
+            background: #f9fbfd;
+            padding: 40px 0 60px;
+            border-top: 1px solid #e6edf2;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin-top: 32px;
+        }
+        .tip-card {
+            background: white;
+            padding: 24px;
+            border-radius: 24px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #eef2f6;
+        }
+        .tip-card i {
+            font-size: 2rem;
+            color: #1f6e43;
+            margin-bottom: 16px;
+        }
+        .tip-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .tip-card p {
+            font-size: 0.85rem;
+            color: #5f6c7a;
+        }
+
+        /* ========= FOOTER ========= */
+        footer {
+            background: #0b2b3b;
+            color: #cddfd9;
+            padding: 40px 0 24px;
+            font-size: 0.85rem;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-copyright {
+            text-align: center;
+            border-top: 1px solid #2c4f5e;
+            padding-top: 24px;
+            font-size: 0.75rem;
+        }
+
+        /* ========= RESPONSIVE ========= */
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 18px;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+            .tracking-card {
+                margin: 0 16px;
+            }
+            .status-detail-item {
+                flex-direction: column;
+                gap: 6px;
+            }
+            .status-detail-item strong {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR (consistent with home page) -->
+<div class="top-bar">
+    <div class="container">
+        <a href="#"><i class="fas fa-phone-alt"></i> 0800 123 456</a>
+        <a href="#"><i class="fas fa-envelope"></i> support@gertsibande.gov.za</a>
+        <a href="#"><i class="fas fa-map-marker-alt"></i> 34 Mayor's Street, Secunda</a>
+    </div>
+</div>
+
+<!-- MAIN NAVIGATION -->
+<div class="navbar">
+    <div class="container nav-flex">
+        <div class="logo">
+            <h1>Gert Sibande</h1>
+            <p>Municipality · Service with Excellence</p>
+        </div>
+        <div class="menu-toggle" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'report' %}">Report Issue</a>
+            <a href="{% url 'track' %}" class="active">Track Issue</a>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}" class="btn-outline-light">Register</a>
+        </div>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+    <div class="container hero-content">
+        <h2>Track Your Service Request</h2>
+        <p>Enter your unique tracking ID to get real-time status updates on reported issues</p>
+    </div>
+</div>
+
+<!-- MAIN TRACKING SECTION -->
+<div class="tracking-section">
+    <div class="container">
+        <div class="tracking-card">
+            <div class="tracking-header">
+                <i class="fas fa-search-location"></i>
+                <h3>Check Status</h3>
+                <p>Quick & easy — monitor your municipal service requests</p>
+            </div>
+            <div class="tracking-body">
+                <!-- TRACKING FORM (enhanced with CSRF) -->
+                <form method="POST" class="tracking-form" id="trackingForm">
+                    {% csrf_token %}
+                    <div class="input-group-custom">
+                        <i class="fas fa-qrcode"></i>
+                        <input type="text" 
+                               name="tracking_id" 
+                               id="trackingId" 
+                               placeholder="e.g., GTS-2024-12345 or TRK-8765"
+                               autocomplete="off"
+                               required>
+                    </div>
+                    <button type="submit" class="tracking-btn">
+                        <i class="fas fa-arrow-right"></i> Check Status
+                    </button>
+                </form>
+
+                <!-- STATUS RESULT DISPLAY (enhanced with dynamic classes and icons) -->
+                {% if status %}
+                <div class="status-result animate__animated animate__fadeInUp" style="animation: fadeInUp 0.4s ease;">
+                    <div class="status-header">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h4>Service Request Details</h4>
+                    </div>
+                    
+                    <!-- Tracking ID display -->
+                    <div class="status-detail-item">
+                        <i class="fas fa-hashtag"></i>
+                        <strong>Tracking ID:</strong>
+                        <span><code style="background:#eef2f6; padding:4px 8px; border-radius:8px;">{{ request.POST.tracking_id }}</code></span>
+                    </div>
+                    
+                    <!-- Status with dynamic badge -->
+                    <div class="status-detail-item">
+                        <i class="fas fa-flag-checkered"></i>
+                        <strong>Current Status:</strong>
+                        <span>
+                            {% if status|lower == "pending" or status == "Pending" %}
+                            <div class="status-badge status-pending">
+                                <i class="fas fa-hourglass-half"></i> 
+                                <strong>Pending</strong> - Awaiting assignment
+                            </div>
+                            {% elif status|lower == "in progress" or status == "In Progress" or status == "in-progress" %}
+                            <div class="status-badge status-progress">
+                                <i class="fas fa-tools"></i> 
+                                <strong>In Progress</strong> - Being addressed by our team
+                            </div>
+                            {% elif status|lower == "resolved" or status == "Resolved" %}
+                            <div class="status-badge status-resolved">
+                                <i class="fas fa-check-circle"></i> 
+                                <strong>Resolved</strong> - Issue successfully resolved
+                            </div>
+                            {% else %}
+                            <div class="status-badge" style="background:#e9ecef; color:#495057;">
+                                <i class="fas fa-info-circle"></i> 
+                                <strong>{{ status }}</strong>
+                            </div>
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <!-- Additional helpful info (dynamic based on status) -->
+                    <div class="status-detail-item">
+                        <i class="fas fa-clock"></i>
+                        <strong>Last Updated:</strong>
+                        <span>{% now "F j, Y, g:i a" %}</span>
+                    </div>
+                    
+                    {% if status|lower == "pending" %}
+                    <div class="alert alert-warning mt-3" style="background:#fff3e0; border-radius:20px; padding:12px 16px;">
+                        <i class="fas fa-info-circle me-2"></i> Your request is in the queue. Typical response time: 2-3 business days.
+                    </div>
+                    {% elif status|lower == "in progress" %}
+                    <div class="alert alert-info mt-3" style="background:#e3f2fd; border-radius:20px; padding:12px 16px;">
+                        <i class="fas fa-user-cog me-2"></i> Our service team is actively working on your issue. We'll notify you once resolved.
+                    </div>
+                    {% elif status|lower == "resolved" %}
+                    <div class="alert alert-success mt-3" style="background:#e8f5e9; border-radius:20px; padding:12px 16px;">
+                        <i class="fas fa-smile me-2"></i> Great news! Your issue has been resolved. Thank you for helping improve our community.
+                    </div>
+                    {% endif %}
+                </div>
+                {% elif request.method == "POST" and not status %}
+                <div class="status-result" style="border-left: 4px solid #f4a261;">
+                    <div class="no-status">
+                        <i class="fas fa-search"></i>
+                        <h5>No request found</h5>
+                        <p class="text-muted mt-2">We couldn't find a service request with ID "<strong>{{ request.POST.tracking_id }}</strong>".<br>
+                        Please verify the tracking ID or <a href="{% url 'report' %}" style="color:#1f6e43;">report a new issue</a>.</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QUICK TIPS / HELPFUL INFO (matching home page style) -->
+<div class="tips-section">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 24px;">
+            <h3 style="color:#0b2b3b; font-weight:700;"><i class="fas fa-lightbulb me-2" style="color:#ffcd3c;"></i> Quick Tips</h3>
+            <p style="color:#5f6c7a;">Make tracking your municipal requests even easier</p>
+        </div>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <i class="fas fa-id-card"></i>
+                <h4>Where to find your ID</h4>
+                <p>Tracking ID is provided via email or SMS after reporting an issue. Format: GTS-XXXX-XXXX</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-bell"></i>
+                <h4>Get notifications</h4>
+                <p>Enable notifications to receive real-time updates when your request status changes.</p>
+            </div>
+            <div class="tip-card">
+                <i class="fas fa-phone-alt"></i>
+                <h4>Need assistance?</h4>
+                <p>Call our support center at 0800 123 456 for help with tracking your service request.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER (matching municipality) -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4 style="color: white; margin-bottom: 12px;">Gert Sibande District</h4>
+                <p>Committed to transparent service delivery and community engagement through digital innovation.</p>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 12px;">Useful Links</h4>
+                <ul style="list-style: none; line-height: 1.8; padding:0;">
+                    <li><a href="#" style="color:#bcd0cb; text-decoration: none;">Report an Issue</a></li>
+                    <li><a href="#" style="color:#bcd0cb; text-decoration: none;">Service Directory</a></li>
+                    <li><a href="#" style="color:#bcd0cb; text-decoration: none;">FAQs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 12px;">Contact Centre</h4>
+                <p><i class="fas fa-phone"></i> 017 620 0200</p>
+                <p><i class="fas fa-envelope"></i> tracking@gertsibande.gov.za</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 7:30 – 16:00</p>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2025 Gert Sibande Municipality. All rights reserved. | Serving the community with excellence</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Simple mobile navigation toggle -->
+<script>
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    }
+    
+    // Add client-side validation for tracking ID (optional enhancement)
+    const form = document.getElementById('trackingForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const trackingInput = document.getElementById('trackingId');
+            if (!trackingInput.value.trim()) {
+                e.preventDefault();
+                alert('Please enter a valid tracking ID to check status.');
+                trackingInput.focus();
+            }
+        });
+    }
+    
+    // Auto-focus on tracking ID field
+    document.getElementById('trackingId')?.focus();
+</script>
+
+<!-- Optional animation style -->
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate__animated {
+        animation-duration: 0.4s;
+    }
+</style>
+
+</body>
+</html>

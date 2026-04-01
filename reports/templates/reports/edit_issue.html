@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gert Sibande Municipality | Edit Issue</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fc;
+            color: #1e2a3e;
+        }
+
+        .top-bar {
+            background-color: #0b2b3b;
+            color: white;
+            padding: 10px 0;
+            font-size: 0.85rem;
+        }
+        .top-bar .container-fluid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 24px;
+        }
+        .top-bar a {
+            color: #e0f2fe;
+            text-decoration: none;
+        }
+        .top-bar a:hover {
+            color: #ffcd3c;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f6e43, #0f4c2d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e2a3e;
+        }
+        .nav-links a:hover {
+            color: #1f6e43;
+        }
+        .btn-outline-light {
+            background: transparent;
+            border: 1.5px solid #1f6e43;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: #1f6e43;
+        }
+        .edit-section {
+            padding: 60px 0;
+            min-height: calc(100vh - 200px);
+        }
+        .edit-card {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-save {
+            background: #1f6e43;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        footer {
+            background: #0b2b3b;
+            color: #cddfd9;
+            padding: 40px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="container-fluid">
+        <a href="#"><i class="fas fa-phone-alt"></i> 0800 123 456</a>
+        <a href="#"><i class="fas fa-envelope"></i> support@gertsibande.gov.za</a>
+        <a href="#"><i class="fas fa-map-marker-alt"></i> 34 Mayor's Street, Secunda</a>
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="nav-flex">
+        <div class="logo">
+            <h1>Gert Sibande</h1>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'report' %}">Report Issue</a>
+            <a href="{% url 'track' %}">Track Issue</a>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            {% if user.is_authenticated %}
+                <span style="color: #1f6e43;">{{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="btn-outline-light">Logout</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="edit-section">
+    <div class="container">
+        <div class="edit-card">
+            <h2 style="margin-bottom: 24px;">Edit Issue</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Issue Type</label>
+                    <select name="issue_type" required>
+                        <option value="Water" {% if issue.issue_type == "Water" %}selected{% endif %}>Water Services</option>
+                        <option value="Electricity" {% if issue.issue_type == "Electricity" %}selected{% endif %}>Electricity</option>
+                        <option value="Roads" {% if issue.issue_type == "Roads" %}selected{% endif %}>Roads & Transport</option>
+                        <option value="Waste" {% if issue.issue_type == "Waste" %}selected{% endif %}>Waste Management</option>
+                        <option value="Other" {% if issue.issue_type == "Other" %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" required>{{ issue.description }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" value="{{ issue.location }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Contact Number (Optional)</label>
+                    <input type="text" name="contact_number" value="{{ issue.contact_number|default:'' }}">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status">
+                        <option value="Pending" {% if issue.status == "Pending" %}selected{% endif %}>Pending</option>
+                        <option value="In Progress" {% if issue.status == "In Progress" %}selected{% endif %}>In Progress</option>
+                        <option value="Resolved" {% if issue.status == "Resolved" %}selected{% endif %}>Resolved</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a href="{% url 'dashboard' %}" class="btn-cancel">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 Gert Sibande Municipality | All Rights Reserved</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,650 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Gert Sibande Municipality | Home</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fc;
+            color: #1e2a3e;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ========= TOP BAR ========= */
+        .top-bar {
+            background-color: #0b2b3b;
+            color: white;
+            padding: 10px 0;
+            font-size: 0.85rem;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .top-bar .slogan {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .top-bar .slogan i {
+            margin-right: 6px;
+            color: #ffcd3c;
+        }
+        .top-bar .contact-info {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .top-bar a {
+            color: #e0f2fe;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .top-bar a:hover {
+            color: #ffcd3c;
+        }
+
+        /* ========= MAIN NAVIGATION ========= */
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 18px 0;
+        }
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f6e43, #0f4c2d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #5a6874;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e2a3e;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover {
+            color: #1f6e43;
+        }
+        .nav-links .active {
+            color: #1f6e43;
+            border-bottom: 2px solid #1f6e43;
+            padding-bottom: 4px;
+        }
+        .btn-outline-light {
+            background: transparent;
+            border: 1.5px solid #1f6e43;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: #1f6e43;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-outline-light:hover {
+            background: #1f6e43;
+            color: white;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1f6e43;
+            font-weight: 500;
+            padding: 8px 16px;
+            background: #eef4f0;
+            border-radius: 40px;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #1f6e43;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(11, 43, 59, 0.75), rgba(11, 43, 59, 0.85)), 
+                        url('https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed;
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+        }
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffcd3c;
+            color: #0b2b3b;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .hero-btn:hover {
+            background: #e6b422;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: white;
+            padding: 40px 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1f6e43;
+        }
+        .stat-item p {
+            color: #5a6874;
+            font-weight: 500;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 70px 0;
+            background: #ffffff;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0b2b3b;
+        }
+        .section-title p {
+            color: #5a6874;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: white;
+            padding: 32px 24px;
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #eef2f6;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: #eef4f0;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .service-icon i {
+            font-size: 2rem;
+            color: #1f6e43;
+        }
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .service-card p {
+            color: #5f6c7a;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .service-link {
+            color: #1f6e43;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .service-link:hover {
+            gap: 10px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a5f 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+        .btn-primary {
+            background: #ffcd3c;
+            color: #0b2b3b;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: #0b2b3b;
+        }
+
+        /* Messages */
+        .messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+        }
+        .alert {
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideIn 0.3s ease;
+        }
+        .alert-success {
+            border-left: 4px solid #2e7d32;
+            color: #2e7d32;
+        }
+        .alert-error {
+            border-left: 4px solid #dc2626;
+            color: #dc2626;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: #0b2b3b;
+            color: #cddfd9;
+            padding: 50px 0 24px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: #bcd0cb;
+            text-decoration: none;
+        }
+        .footer-col ul li a:hover {
+            color: #ffcd3c;
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #2c4f5e;
+            padding-top: 24px;
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 18px;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Display messages -->
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="container">
+        <div class="slogan">
+            <i class="fas fa-handshake"></i> Serving the community with excellence
+        </div>
+        <div class="contact-info">
+            <a href="#"><i class="fas fa-phone-alt"></i> 0800 123 456</a>
+            <a href="#"><i class="fas fa-envelope"></i> support@gertsibande.gov.za</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> 34 Mayor's Street, Secunda</a>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN NAVIGATION -->
+<div class="navbar">
+    <div class="container nav-flex">
+        <div class="logo">
+            <h1>Gert Sibande</h1>
+            <p>Municipality · Service with Excellence</p>
+        </div>
+        <div class="menu-toggle" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="{% url 'home' %}" class="active">Home</a>
+            <a href="{% url 'report' %}">Report Issue</a>
+            <a href="{% url 'track' %}">Track Issue</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                {% if user.is_superuser or user.is_staff %}
+                    <a href="{% url 'admin_dashboard' %}">Admin Panel</a>
+                {% endif %}
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>{{ user.username }}</span>
+                </div>
+                <a href="{% url 'logout' %}" class="btn-outline-light">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}" class="btn-outline-light">Register</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+    <div class="container hero-content">
+        <h1>Welcome to Gert Sibande Municipality</h1>
+        <p>Improving service delivery through innovative digital solutions. Your partner in community development.</p>
+        <a href="{% url 'report' %}" class="hero-btn">
+            <i class="fas fa-exclamation-triangle"></i> Report an Issue
+        </a>
+    </div>
+</div>
+
+<!-- STATS BANNER -->
+<div class="stats-banner">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>Service Resolution Rate</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Emergency Response</p>
+            </div>
+            <div class="stat-item">
+                <h3>50K+</h3>
+                <p>Issues Resolved</p>
+            </div>
+            <div class="stat-item">
+                <h3>4.8★</h3>
+                <p>Community Rating</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SERVICES SECTION -->
+<div class="services-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Delivering quality public services with transparency, efficiency, and care</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <h3>Water Services</h3>
+                <p>Report leaks, burst pipes, water supply interruptions, and pressure issues.</p>
+                <a href="{% url 'report' %}" class="service-link">Report issue <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Electricity</h3>
+                <p>Report power outages, electrical faults, streetlight failures, and meter issues.</p>
+                <a href="{% url 'report' %}" class="service-link">Report fault <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-road"></i>
+                </div>
+                <h3>Roads & Transport</h3>
+                <p>Report potholes, road damages, traffic signal issues, and signage problems.</p>
+                <a href="{% url 'report' %}" class="service-link">Report damage <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <h3>Waste Management</h3>
+                <p>Report missed collections, illegal dumping, and recycling service requests.</p>
+                <a href="{% url 'report' %}" class="service-link">Report issue <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CALL TO ACTION SECTION -->
+<div class="cta-section">
+    <div class="container">
+        <h3>Have an Issue to Report?</h3>
+        <p>Help us keep Gert Sibande clean, safe, and functional. Your voice matters!</p>
+        <div class="cta-buttons">
+            <a href="{% url 'report' %}" class="btn-primary">
+                <i class="fas fa-plus-circle"></i> Report Now
+            </a>
+            <a href="{% url 'track' %}" class="btn-outline">
+                <i class="fas fa-search"></i> Track Existing Issue
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Gert Sibande District Municipality</h4>
+                <p>Committed to improving service delivery through digital innovation and community engagement.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'report' %}">Report an Issue</a></li>
+                    <li><a href="{% url 'track' %}">Track Service Request</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Information</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 017 620 0200</li>
+                    <li><i class="fas fa-envelope"></i> customerservice@gertsibande.gov.za</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 7:30am – 4:00pm</li>
+                    <li><i class="fas fa-clock"></i> Emergency: 24/7</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Emergency Hotlines</h4>
+                <ul>
+                    <li><i class="fas fa-tint"></i> Water Emergency: 0800 111 222</li>
+                    <li><i class="fas fa-bolt"></i> Power Outage: 0800 333 444</li>
+                    <li><i class="fas fa-ambulance"></i> Disaster Management: 10177</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Gert Sibande Municipality | All Rights Reserved | Serving the community with excellence</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    }
+    
+    setTimeout(() => {
+        const messages = document.querySelector('.messages');
+        if (messages) {
+            messages.style.opacity = '0';
+            setTimeout(() => messages.remove(), 300);
+        }
+    }, 5000);
+</script>
+
+</body>
+</html>

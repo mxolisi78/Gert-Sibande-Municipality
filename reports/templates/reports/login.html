@@ -1,0 +1,526 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Gert Sibande Municipality | Login</title>
+  <!-- Google Fonts + modern font stack -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f7fc;
+      color: #1e2a3e;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ========= TOP BAR (municipality style) ========= */
+    .top-bar {
+      background-color: #0b2b3b;
+      color: white;
+      padding: 10px 0;
+      font-size: 0.85rem;
+    }
+    .top-bar .container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .top-bar a {
+      color: #e0f2fe;
+      text-decoration: none;
+      transition: 0.2s;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .top-bar a:hover {
+      color: #ffcd3c;
+    }
+
+    /* ========= MAIN NAVIGATION ========= */
+    .navbar {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 18px 0;
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1f6e43, #0f4c2d);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .logo p {
+      font-size: 0.75rem;
+      color: #5a6874;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e2a3e;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover {
+      color: #1f6e43;
+    }
+    .nav-links .active {
+      color: #1f6e43;
+      border-bottom: 2px solid #1f6e43;
+      padding-bottom: 4px;
+    }
+    .btn-outline-light {
+      background: transparent;
+      border: 1.5px solid #1f6e43;
+      padding: 8px 20px;
+      border-radius: 40px;
+      color: #1f6e43;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-outline-light:hover {
+      background: #1f6e43;
+      color: white;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #1f6e43;
+    }
+
+    /* Hero section */
+    .hero {
+      background: linear-gradient(105deg, #eef4f0 0%, #dfe9e3 100%);
+      padding: 48px 0 56px;
+      border-bottom: 1px solid rgba(31, 110, 67, 0.15);
+    }
+    .hero-content {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero-content h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #0b2b3b;
+      margin-bottom: 12px;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #2c4b3e;
+      font-weight: 500;
+    }
+
+    /* LOGIN CARD */
+    .login-section {
+      padding: 60px 0 80px;
+      background: #ffffff;
+    }
+    .login-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      border: 1px solid rgba(31, 110, 67, 0.2);
+    }
+    .login-header {
+      background: #0b2b3b;
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .login-header i {
+      font-size: 3rem;
+      color: #ffcd3c;
+      background: rgba(255,255,240,0.1);
+      padding: 12px;
+      border-radius: 60px;
+      margin-bottom: 12px;
+    }
+    .login-header h3 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .login-header p {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    .login-body {
+      padding: 36px 32px 40px;
+    }
+    .input-group {
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .input-group i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6c8b75;
+      font-size: 1.1rem;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 15px 16px 15px 46px;
+      font-size: 1rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 60px;
+      font-family: 'Inter', sans-serif;
+      background: #fefefe;
+      transition: all 0.2s;
+      outline: none;
+    }
+    .input-group input:focus {
+      border-color: #1f6e43;
+      box-shadow: 0 0 0 3px rgba(31,110,67,0.2);
+    }
+    .login-btn {
+      width: 100%;
+      background: #1f6e43;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 60px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: 'Inter', sans-serif;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+    .login-btn:hover {
+      background: #0f5436;
+      transform: scale(0.98);
+      box-shadow: 0 8px 18px rgba(31,110,67,0.3);
+    }
+    .extra-links {
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      border-top: 1px solid #edf2f7;
+      padding-top: 20px;
+      margin-top: 8px;
+    }
+    .extra-links a {
+      text-decoration: none;
+      color: #1f6e43;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .extra-links a:hover {
+      text-decoration: underline;
+      color: #0b2b3b;
+    }
+    .demo-note {
+      background: #f0f9f4;
+      border-radius: 40px;
+      text-align: center;
+      margin-top: 24px;
+      padding: 12px;
+      font-size: 0.75rem;
+      color: #2c6e49;
+      border: 1px solid #cfe8db;
+    }
+    
+    /* Services preview */
+    .services-preview {
+      background: #f9fbfd;
+      padding: 48px 0 64px;
+      border-top: 1px solid #e6edf2;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0b2b3b;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .service-card {
+      background: white;
+      padding: 28px 20px;
+      border-radius: 24px;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #eef2f6;
+    }
+    .service-card i {
+      font-size: 2.4rem;
+      color: #1f6e43;
+      margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .service-card p {
+      color: #5f6c7a;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    .service-link {
+      color: #1f6e43;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    /* Footer */
+    footer {
+      background: #0b2b3b;
+      color: #cddfd9;
+      padding: 40px 0 24px;
+      font-size: 0.85rem;
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .footer-copyright {
+      text-align: center;
+      border-top: 1px solid #2c4f5e;
+      padding-top: 24px;
+      font-size: 0.75rem;
+    }
+    
+    @media (max-width: 800px) {
+      .container {
+        padding: 0 20px;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-content h2 {
+        font-size: 1.8rem;
+      }
+      .login-card {
+        margin: 0 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <a href="#"><i class="fas fa-phone-alt"></i> 0800 123 456</a>
+    <a href="#"><i class="fas fa-envelope"></i> support@gertsibande.gov.za</a>
+    <a href="#"><i class="fas fa-map-marker-alt"></i> 34 Mayor's Street, Secunda</a>
+  </div>
+</div>
+
+<!-- MAIN NAVIGATION - FIXED with proper URL links -->
+<div class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">
+      <h1>Gert Sibande</h1>
+      <p>Municipality · Service with Excellence</p>
+    </div>
+    <div class="menu-toggle" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+      <a href="{% url 'report' %}"><i class="fas fa-plus-circle"></i> Report Issue</a>
+      <a href="{% url 'track' %}"><i class="fas fa-search"></i> Track Issue</a>
+      <a href="{% url 'dashboard' %}"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="{% url 'login' %}" class="active"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="{% url 'register' %}" class="btn-outline-light"><i class="fas fa-user-plus"></i> Register</a>
+    </div>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="container hero-content">
+    <h2>Welcome to e-Services Portal</h2>
+    <p>Access your municipal account, report issues, and track service requests — securely.</p>
+  </div>
+</div>
+
+<!-- LOGIN SECTION -->
+<div class="login-section">
+  <div class="container">
+    <div class="login-card">
+      <div class="login-header">
+        <i class="fas fa-user-circle"></i>
+        <h3>Sign In</h3>
+        <p>Use your registered credentials</p>
+      </div>
+      <div class="login-body">
+        <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="username" placeholder="Username / Email" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" placeholder="Password" required>
+          </div>
+          <button type="submit" class="login-btn">
+            <i class="fas fa-arrow-right-to-bracket"></i> Login to Dashboard
+          </button>
+          <div class="extra-links">
+            <a href="#"><i class="far fa-question-circle"></i> Forgot password?</a>
+            <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Create new account</a>
+          </div>
+          <div class="demo-note">
+            <i class="fas fa-info-circle"></i> Demo: Use any username/password to access the dashboard
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Services Preview -->
+<div class="services-preview">
+  <div class="container">
+    <div class="section-title">
+      <h2>Our Services</h2>
+      <p>Delivering quality public services with transparency and care</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-tint"></i>
+        <h3>Water Services</h3>
+        <p>Report leaks and water supply issues. 24/7 emergency response.</p>
+        <a href="{% url 'report' %}" class="service-link">Report issue <i class="fas fa-chevron-right"></i></a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-bolt"></i>
+        <h3>Electricity</h3>
+        <p>Report outages and electrical faults. Stay updated on load shedding.</p>
+        <a href="{% url 'report' %}" class="service-link">Report fault <i class="fas fa-chevron-right"></i></a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-road"></i>
+        <h3>Roads & Transport</h3>
+        <p>Report potholes, road damages, and traffic concerns.</p>
+        <a href="{% url 'report' %}" class="service-link">Report damage <i class="fas fa-chevron-right"></i></a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-trash-alt"></i>
+        <h3>Waste Management</h3>
+        <p>Report waste collection issues and recycling inquiries.</p>
+        <a href="{% url 'report' %}" class="service-link">Report issue <i class="fas fa-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4 style="color: white; margin-bottom: 12px;">Gert Sibande District</h4>
+        <p>Committed to improving service delivery through digital innovation and community engagement.</p>
+      </div>
+      <div>
+        <h4 style="color: white; margin-bottom: 12px;">Quick Links</h4>
+        <ul style="list-style: none; line-height: 1.8;">
+          <li><a href="{% url 'report' %}" style="color:#bcd0cb; text-decoration: none;">Report an Issue</a></li>
+          <li><a href="{% url 'track' %}" style="color:#bcd0cb; text-decoration: none;">Track Service Request</a></li>
+          <li><a href="{% url 'dashboard' %}" style="color:#bcd0cb; text-decoration: none;">Dashboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: white; margin-bottom: 12px;">Contact Centre</h4>
+        <p><i class="fas fa-phone"></i> 017 620 0200</p>
+        <p><i class="fas fa-envelope"></i> customerservice@gertsibande.gov.za</p>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>© 2025 Gert Sibande Municipality. All rights reserved. | Serving the community with excellence</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+</script>
+</body>
+</html>
